@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=kylin-kmre-filewatcher
+Comment=watch files and make links
+Exec=kylin-kmre-filewatcher
+Terminal=false
+Type=Application
+NoDisplay=true
+X-GNOME-Autostart-Phase=Applications
+X-MATE-Autostart-Phase=Applications

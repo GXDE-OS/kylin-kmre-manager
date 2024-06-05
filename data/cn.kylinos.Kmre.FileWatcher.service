@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=cn.kylinos.Kmre.FileWatcher
+Exec=/usr/bin/kylin-kmre-filewatcher
+#SystemdService=kylin-kmre-filewatcher.service

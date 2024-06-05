@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=cn.kylinos.Kmre.Audio
+Exec=/usr/bin/kylin-kmre-audio
+#SystemdService=kylin-kmre-audio.service

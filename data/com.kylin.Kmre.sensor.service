@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=com.kylin.Kmre.sensor
+Exec=/usr/bin/kylin-kmre-sensor
+#SystemdService=dbus-kylin-kmre-sensor.service

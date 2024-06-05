@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=cn.kylinos.Kmre.Manager
+Exec=/usr/bin/kylin-kmre-manager
+#SystemdService=dbus-cn.kylinos.Kmre.Manager.service

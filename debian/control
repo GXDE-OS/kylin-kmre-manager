@@ -1,0 +1,61 @@
+Source: kylin-kmre-manager
+Section: utils
+Priority: optional
+Maintainer: xiehuijun <xiehuijun@kylinos.cn>
+Build-Depends: debhelper (>= 9),
+               qtbase5-dev (>= 5.1),
+               qt5-qmake,
+               qtscript5-dev,
+               qttools5-dev-tools,
+               libqt5opengl5-dev,
+               qtmultimedia5-dev,
+               libspeexdsp-dev,
+               libproperties-cpp-dev,
+               libdrm-dev,
+               libgtest-dev,
+               pkg-config,
+               libboost-dev,
+               libboost-system-dev,
+               libboost-filesystem-dev,
+               libboost-thread-dev,
+               libboost-log-dev,
+               libpciaccess-dev,
+               libdrm-dev,
+               libxcb1-dev,
+               libxcb-dri3-dev,
+               libxcb-dri2-0-dev,
+               libxcb-xinerama0-dev,
+               libxcb-randr0-dev,
+               libxcb-icccm4-dev,
+               libwayland-dev,
+               libevent-dev,
+               libglib2.0-dev (>= 2.46.0),
+               libglm-dev,
+               zlib1g-dev,
+               libxinerama-dev,
+               libgles2-mesa-dev,
+               libxfixes-dev,
+               libxext-dev,
+               libx11-dev,
+               libasound2-dev,
+               libqt5svg5-dev,
+               libgsettings-qt-dev,
+               kylin-kmre-display-control (>= 2.4.1),
+Standards-Version: 3.9.8
+Homepage: https://www.kylinos.cn
+
+Package: kylin-kmre-manager
+Architecture: arm64 amd64
+Conflicts: kydroid2, kydroid2-app-data, kydroid2-daemon, kydroid2-filewatcher, kydroid2-fuse, kydroid2-image-data, kydroid-manager, kydroid-appstream, kydroid-filewatcher, kydroid-audio
+Replaces: kydroid-manager, kydroid-appstream, kydroid-filewatcher, kydroid-audio
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         kylin-kmre-display-control (>= 1.4.7),
+         libkylin-kmre-emugl (>= 1.2),
+         libqt5multimedia5-plugins,
+         binfmt-support,
+Description: Communication and management module for kmre
+ It is the backend manager, audio server, input control, filewatcher for KMRE.
+ .
+ Features:
+  * .

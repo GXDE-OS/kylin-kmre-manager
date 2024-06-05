@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>translations/kylin-kmre-filewatcher_zh_CN.qm</file>
+    </qresource>
+</RCC>

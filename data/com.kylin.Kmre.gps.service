@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=com.kylin.Kmre.gpsserver
+Exec=/usr/bin/kylin-kmre-gps-server
+#SystemdService=dbus-kylin-kmre-gps.service

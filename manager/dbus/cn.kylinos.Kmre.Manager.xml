@@ -1,0 +1,90 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<!--
+ * Copyright (c) KylinSoft Co., Ltd. 2016-2024.All rights reserved.
+ *
+ * Authors:
+ *  Kobe Lee    lixiang@kylinos.cn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+
+<node name="/cn/kylinos/Kmre/Manager">
+  <interface name="cn.kylinos.Kmre.Manager">
+    <method name="quit"/>
+    <method name="closeApp">
+      <arg name="appName" type="s" direction="in"/>
+      <arg name="pkgName" type="s" direction="in"/>
+      <arg name="forceKill" type="b" direction="in"/>
+    </method>
+    <method name="getDisplayInformation">
+      <arg name="info" type="s" direction="out"/>
+    </method>
+    <method name="controlApp">
+      <arg name="id" type="i" direction="in"/>
+      <arg name="pkgName" type="s" direction="in"/>
+      <arg name="event_type" type="i" direction="in"/>
+    </method>
+    <method name="setSystemProp">
+      <arg name="event_type" type="i" direction="in"/>
+      <arg name="value_field" type="s" direction="in"/>
+      <arg name="value" type="s" direction="in"/>
+    </method>
+    <method name="getSystemProp">
+      <arg name="event_type" type="i" direction="in"/>
+      <arg name="value_field" type="s" direction="in"/>
+      <arg name="value" type="s" direction="out"/>
+    </method>
+    <method name="addOneRecord">
+      <arg name="path" type="s" direction="in"/>
+      <arg name="mime_type" type="s" direction="in"/>
+    </method>
+    <method name="removeOneRecord">
+      <arg name="path" type="s" direction="in"/>
+      <arg name="mime_type" type="s" direction="in"/>
+    </method>
+    <method name="commandToGetAllFiles">
+      <arg name="type" type="i" direction="in"/>
+    </method>
+    <method name="filesIsEmpty">
+      <arg name="ret" type="b" direction="out"/>
+    </method>
+    <method name="getAllFiles">
+      <arg name="uri" type="s" direction="in"/>
+      <arg name="reverse" type="b" direction="in"/>
+      <arg name="result" type="a(ss)" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="AndroidMetaList"/>
+    </method>
+    <method name="isHostSupportDDS">
+      <arg name="value" type="b" direction="out"/>
+    </method>
+    <method name="setCameraDevice">
+      <arg name="device" type="s" direction="in"/>
+    </method>
+    <method name="getCameraDevice">
+      <arg name="device" type="s" direction="out"/>
+    </method>
+    <signal name="filesMessage">
+      <arg name="type" type="i"/>
+      <arg name="metas" type="a(ss)"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="AndroidMetaList"/>
+    </signal>
+    <signal name="currentCameraDevice">
+      <arg name="deviceName" type="s"/>
+    </signal>
+    <signal name="appSeparationStateChanged">
+      <arg name="pkgName" type="s"/>
+      <arg name="enable" type="b"/>
+    </signal>
+  </interface>
+</node>

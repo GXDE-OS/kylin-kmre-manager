@@ -1,0 +1,36 @@
+#!/usr/bin/make -f
+include /usr/share/dpkg/default.mk
+export QT_SELECT=5
+
+QMAKE_OPTS = DEFINES+=NO_DEBUG_ON_CONSOLE
+MAKE_OPTS  = PREFIX=/usr QMAKE=qmake LRELEASE=lrelease QMAKE_OPTS="$(QMAKE_OPTS)"
+
+override_dh_auto_configure:
+	QT_SELECT=qt5 dh_auto_configure \
+                -- "QMAKE_CXXFLAGS=$(CFLAGS)" \
+                kylin-kmre-manager.pro
+
+%:
+	dh $@
+
+override_dh_install:
+	dh_install --fail-missing
+
+override_dh_auto_clean:
+	[ ! -f .qmake.stash ] || $(RM) .qmake.stash
+	[ ! -d manager/.moc ] || $(RM) -r manager/.moc
+	[ ! -d manager/.obj ] || $(RM) -r manager/.obj
+	[ ! -d appstream/.moc ] || $(RM) -r appstream/.moc
+	[ ! -d appstream/.obj ] || $(RM) -r appstream/.obj
+	[ ! -d audio/.moc ] || $(RM) -r audio/.moc
+	[ ! -d audio/.obj ] || $(RM) -r audio/.obj
+	[ ! -d filewatcher/.moc ] || $(RM) -r filewatcher/.moc
+	[ ! -d filewatcher/.obj ] || $(RM) -r filewatcher/.obj
+	[ ! -d filewatcher/.rcc ] || $(RM) -r filewatcher/.rcc
+	[ ! -d sensors/.moc ] || $(RM) -r sensors/.moc
+	[ ! -d sensors/.obj ] || $(RM) -r sensors/.obj
+	[ ! -f Makefile ] || [ ! -f manager/Makefile ] || [ ! -f appstream/Makefile ] || [ ! -f audio/Makefile ]|| [ ! -f filewatcher/Makefile ] || [ ! -f sensors/Makefile ] || dh_auto_clean
+
+#override_dh_auto_build:
+#	dh_auto_build -- $(MAKE_OPTS)
+

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ "$BASH" != "/bin/bash" ] && [ "$BASH" != "/usr/bin/bash" ]; then
+    bash "$0" "$@"
+    exit $?
+fi
+
+# daemon reload
+systemctl daemon-reload
+
+case "$1" in
+    configure)
+        rm -f /etc/xdg/autostart/kylin-kmre-filewatcher.desktop 2>/dev/null
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+exit 0
