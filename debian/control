@@ -45,7 +45,7 @@ Standards-Version: 3.9.8
 Homepage: https://www.kylinos.cn
 
 Package: kylin-kmre-manager
-Architecture: arm64 amd64
+Architecture: any
 Conflicts: kydroid2, kydroid2-app-data, kydroid2-daemon, kydroid2-filewatcher, kydroid2-fuse, kydroid2-image-data, kydroid-manager, kydroid-appstream, kydroid-filewatcher, kydroid-audio
 Replaces: kydroid-manager, kydroid-appstream, kydroid-filewatcher, kydroid-audio
 Depends: ${shlibs:Depends},
