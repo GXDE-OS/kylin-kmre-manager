@@ -307,7 +307,7 @@ bool BackendWorker::generateDesktop(const AppInfo &appInfo)
 
     //generate desktop file
     // ~/.local/share/applications
-    const QString destDesktopFile = desktopsPath + QString("/%1.desktop").arg(appInfo.pkgName);
+    const QString destDesktopFile = desktopsPath + QString("/gxme-%1.desktop").arg(appInfo.pkgName);
     // QFile desktopFp(destDesktopFile);
     // if (desktopFp.exists()) {
     //     desktopFp.remove();
@@ -324,6 +324,7 @@ bool BackendWorker::generateDesktop(const AppInfo &appInfo)
         "StartupNotify=false\n"
         "Keywords=Android;App;Apk\n"
         "Categories=Android;App;Apk\n"
+	"X-GXDE-KMREAPP=true\n"
         "Name=" + appInfo.appName + "\n"
         "Name[zh_CN]=" + appInfo.appName + "\n"
         "Comment=" + appInfo.appName + "\n"
