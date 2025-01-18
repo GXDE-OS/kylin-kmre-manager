@@ -1,9 +1,9 @@
-kylin-kmre-manager (3.0.0.2) UNRELEASED; urgency=medium
+kylin-kmre-manager (3.0.0.3) UNRELEASED; urgency=medium
 
   * 生成的.desktop添加gxme前缀
-  * .desktop添加X-GXDE-KMREAPP=true
+  * .desktop添加X-GXDE-KMREAPP=true、X-GXDE-KMRE-PKGNAME
 
- -- gfdgd_xi <3025613752@qq.com>  Fri, 17 Jan 2025 19:51:16 +0800
+ -- gfdgd_xi <3025613752@qq.com>  Sat, 18 Jan 2025 19:07:04 +0800
 
 kylin-kmre-manager (3.0.0.1) v101; urgency=medium
 

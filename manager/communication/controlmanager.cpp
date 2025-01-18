@@ -177,7 +177,7 @@ void ControlManager::updateAllAppNameInDesktop()
     }
 
     QStringList fileType;
-    fileType << "*.desktop";
+    fileType << "gxme-*.desktop";
     QStringList desktopFiles = desktopsDir.entryList(fileType, 
             QDir::Files | QDir::Readable | QDir::Writable, QDir::Name);
     QVector<AppInfo> appInfoList = getInstalledAppList();
@@ -187,6 +187,7 @@ void ControlManager::updateAllAppNameInDesktop()
 
         QString pkgName = desktopFile;
         pkgName.chop(QString(".desktop").length());
+        pkgName.remove(0, QString("gxme-").length());
         QString appName = "";
 
         for (const auto& appInfo : appInfoList) {

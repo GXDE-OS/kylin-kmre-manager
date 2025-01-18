@@ -285,7 +285,7 @@ void BackendWorker::removeDekstopAndIcon(const QString &pkgName)
     }
 
     //delete desktop file
-    const QString destDesktopFile = QString("%1/.local/share/applications/%2.desktop").arg(QDir::homePath()).arg(pkgName);
+    const QString destDesktopFile = QString("%1/.local/share/applications/gxme-%2.desktop").arg(QDir::homePath()).arg(pkgName);
     QFile fp2(destDesktopFile);
     if (fp2.exists()) {
         if (!fp2.remove()) {
@@ -324,7 +324,8 @@ bool BackendWorker::generateDesktop(const AppInfo &appInfo)
         "StartupNotify=false\n"
         "Keywords=Android;App;Apk\n"
         "Categories=Android;App;Apk\n"
-	"X-GXDE-KMREAPP=true\n"
+        "X-GXDE-KMREAPP=true\n"
+        "X-GXDE-KMRE-PKGNAME=" + appInfo.pkgName + "\n"
         "Name=" + appInfo.appName + "\n"
         "Name[zh_CN]=" + appInfo.appName + "\n"
         "Comment=" + appInfo.appName + "\n"
