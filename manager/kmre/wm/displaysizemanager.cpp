@@ -215,7 +215,8 @@ static QSize calculateWindowDisplaySize(int width, int height)
 
 static qreal getScreenScalingFactor()
 {
-    qreal screenScalingFactor = 1.0;
+    //qreal screenScalingFactor = 1.0;
+    qreal screenScalingFactor = QApplication::primaryScreen()->devicePixelRatio();
     if (QGSettings::isSchemaInstalled("org.ukui.SettingsDaemon.plugins.xsettings")) {
         QGSettings scaleSettings("org.ukui.SettingsDaemon.plugins.xsettings", "/org/ukui/settings-daemon/plugins/xsettings/");
         if (scaleSettings.keys().contains("scalingFactor")) {
