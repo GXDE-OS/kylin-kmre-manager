@@ -1,10 +1,11 @@
-kylin-kmre-manager (3.0.0.4) UNRELEASED; urgency=medium
+kylin-kmre-manager (3.0.0.5) UNRELEASED; urgency=medium
 
   * 生成的.desktop添加gxme前缀
   * .desktop添加X-GXDE-KMREAPP=true、X-GXDE-KMRE-PKGNAME
   * 修复不会跟随系统缩放的问题
+  * 支持使用 DDE/GXDE 的 schemas 获取缩放比
 
- -- gfdgd_xi <3025613752@qq.com>  Sun, 26 Jan 2025 09:03:15 +0800
+ -- gfdgd_xi <3025613752@qq.com>  Sun, 26 Jan 2025 09:30:17 +0800
 
 kylin-kmre-manager (3.0.0.1) v101; urgency=medium
 
