@@ -31,6 +31,6 @@ override_dh_auto_clean:
 	[ ! -d sensors/.obj ] || $(RM) -r sensors/.obj
 	[ ! -f Makefile ] || [ ! -f manager/Makefile ] || [ ! -f appstream/Makefile ] || [ ! -f audio/Makefile ]|| [ ! -f filewatcher/Makefile ] || [ ! -f sensors/Makefile ] || dh_auto_clean
 
-#override_dh_auto_build:
-#	dh_auto_build -- $(MAKE_OPTS)
+override_dh_auto_build:
+	dh_auto_build -- $(MAKE_OPTS) -j$(nproc)
 
