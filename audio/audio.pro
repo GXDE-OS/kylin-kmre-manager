@@ -89,7 +89,7 @@ INCLUDEPATH += common
 INCLUDEPATH += common/include
 
 # for wayland
-#DEFINES += UKUI_WAYLAND
+DEFINES += UKUI_WAYLAND
 
 unix {
     MOC_DIR = .moc
