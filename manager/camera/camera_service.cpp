@@ -18,6 +18,7 @@
  */
 
 #include "camera_service.h"
+#include <QRegularExpression>
 
 #include <stdio.h> 
 #include <sys/types.h> 
@@ -51,7 +52,6 @@ CameraService::CameraService(QObject *parent) :
     QString confName = QDir::homePath() + "/.config/kmre/kmre.ini";
     if (QFile::exists(confName)) {
         QSettings settings(confName, QSettings::IniFormat);
-        settings.setIniCodec("UTF-8");
         settings.beginGroup("camera");
         m_cameraDeviceName = settings.value("device", QString("")).toString();
         settings.endGroup();
@@ -167,9 +167,9 @@ void CameraService::startWorker(void)
                 emit this->sigCurrentCameraDevice(m_cameraDeviceName);
             }
             int videoNum = 0;
-            QRegExp rx("\\d+$");
-            rx.indexIn(m_cameraDeviceName, 0);
-            videoNum = rx.cap(0).toInt();
+            QRegularExpression rx("\\d+$");
+            QRegularExpressionMatch match = rx.match(m_cameraDeviceName);
+            videoNum = match.captured(0).toInt();
             send_fd(com_fd, fd_to_send, videoNum);
         }
 

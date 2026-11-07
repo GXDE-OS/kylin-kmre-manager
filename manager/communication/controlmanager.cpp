@@ -215,7 +215,6 @@ void ControlManager::updateAllAppNameInDesktop()
         QString newContent = "";
         QString line;
 
-        stream.setCodec("UTF-8");
         while (!stream.atEnd()) {
             line = stream.readLine();
             if (line.startsWith("Name=")) {
@@ -464,7 +463,7 @@ void ControlManager::onSyncFiles(int type, AndroidMetaList metas, int totalNum)
                                         .arg(Utils::getUid())
                                         .arg(Utils::getUserName());
                 QString dataPath = entryPath + "/KmreData/";
-                QString fileType = meta.mimeType.split("/", QString::SkipEmptyParts).front();
+                QString fileType = meta.mimeType.split("/", Qt::SkipEmptyParts).front();
                 if (fileType == "audio") 
                     fileType = "音乐";
                 else if (fileType == "video") 
@@ -477,7 +476,7 @@ void ControlManager::onSyncFiles(int type, AndroidMetaList metas, int totalNum)
                     fileType = "其他";
                 
                 QDir dir;
-                QString fileName = meta.path.split("/", QString::SkipEmptyParts).back();
+                QString fileName = meta.path.split("/", Qt::SkipEmptyParts).back();
                 QString filePath = meta.path.remove("/storage/emulated/0", Qt::CaseInsensitive);
                 QString srcFilePath = entryPath + filePath;
 
@@ -567,7 +566,7 @@ void ControlManager::onSyncFiles(int type, AndroidMetaList metas, int totalNum)
                                         .arg(Utils::getUserName());
                 QString dataPath = entryPath + "/KmreData/";
 
-                QString fileType = meta.mimeType.split("/", QString::SkipEmptyParts).front();
+                QString fileType = meta.mimeType.split("/", Qt::SkipEmptyParts).front();
                 if (fileType == "audio") 
                     fileType = "音乐";
                 else if (fileType == "video") 
@@ -579,7 +578,7 @@ void ControlManager::onSyncFiles(int type, AndroidMetaList metas, int totalNum)
                 else
                     fileType = "其他";
                 
-                QString fileName = meta.path.split("/", QString::SkipEmptyParts).back();
+                QString fileName = meta.path.split("/", Qt::SkipEmptyParts).back();
 
                 QString destPath = dataPath + meta.pkgName + "/" + fileType + "/";
                 QString filePath = destPath + fileName;

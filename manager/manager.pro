@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-QT += gui core dbus svg xml
+QT += gui core dbus svg xml widgets
 
 TEMPLATE = app
 TARGET = kylin-kmre-manager
@@ -42,11 +42,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++14
+CONFIG += c++17
 CONFIG += qt warn_on
 CONFIG += release
 CONFIG += link_pkgconfig
-PKGCONFIG += xcb xcb-dri3 libdrm gsettings-qt egl glesv2
+PKGCONFIG += xcb xcb-dri3 libdrm gsettings-qt6 egl glesv2
 
 INCLUDEPATH += /usr/include/boost/
 LIBS += -lboost_system -lboost_filesystem -lboost_log -lboost_thread

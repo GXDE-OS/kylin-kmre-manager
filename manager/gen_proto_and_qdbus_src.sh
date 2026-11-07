@@ -24,7 +24,7 @@ script_path=`dirname $0`
 #$script_path/kmre/protobuf/generate_proto_cpp.sh
 
 cd $script_path/dbus/
-/usr/bin/qdbusxml2cpp cn.kylinos.Kmre.Manager.xml -i metatypes.h -a kmre_manager
+/usr/lib/qt6/bin/qdbusxml2cpp cn.kylinos.Kmre.Manager.xml -i metatypes.h -a kmre_manager
 cd -
 
 echo "Generate qbus source finished."

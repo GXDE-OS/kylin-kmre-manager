@@ -173,7 +173,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("TianJin Kylin");
     QCoreApplication::setApplicationName("kylin-kmre-manager");
     QCoreApplication::setApplicationVersion("3.0");
-    QGuiApplication::setFallbackSessionManagementEnabled(false);
 
     if (!QDBusConnection::sessionBus().isConnected()) {
         syslog(LOG_ERR, "Cannot connect to the D-Bus session bus.\n"
@@ -187,7 +186,6 @@ int main(int argc, char *argv[])
     // set env
     if (QFile::exists("/var/lib/kmre/kmre-global-env")) {
         QSettings settings("/var/lib/kmre/kmre-global-env", QSettings::IniFormat);
-        settings.setIniCodec("UTF-8");
         foreach (QString key, settings.allKeys()) {
             QString value = settings.value(key).toString();
             qputenv(key.toStdString().c_str(), value.toLatin1());//value.toLocal8Bit()

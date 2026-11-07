@@ -90,7 +90,7 @@ int SensordataGet::writeData(QString data)
     QString temp ="acceleration:";
     temp.append(data);
     QDateTime time = QDateTime::currentDateTime();
-    long int timeT = time.toTime_t();
+    long int timeT = time.toSecsSinceEpoch();
     QByteArray ba;
     ba = temp.toLatin1();
     char *ptr = ba.data();

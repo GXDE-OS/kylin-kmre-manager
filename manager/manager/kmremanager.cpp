@@ -229,7 +229,6 @@ void KmreManager::initCpuInformation()
     QString bridge;
     if (QFile::exists(confName)) {
         QSettings settings(confName, QSettings::IniFormat);
-        settings.setIniCodec("UTF-8");
         settings.beginGroup("settings");
         bridge = settings.value("x86_arm_bridge", bridge).toString();
         settings.endGroup();

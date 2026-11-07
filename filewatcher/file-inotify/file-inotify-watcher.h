@@ -24,7 +24,7 @@
 
 #include <sys/inotify.h>
 
-#include <QMutex>
+#include <QRecursiveMutex>
 #include <QMap>
 #include <QMultiMap>
 
@@ -62,7 +62,7 @@ private:
     int mInotifyFd;
     std::atomic<bool> mInitialized;
 
-    QMutex mLock;
+    QRecursiveMutex mLock;
 
     int mCurrentPosition;
     int mTotalRead;

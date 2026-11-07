@@ -276,7 +276,6 @@ int DisplaySizeManager::getWindowDensity()
     if (QFile::exists(WINDOW_DISPLAY_CONF)) {
         QSettings *m_settings = nullptr;
         m_settings = new QSettings(WINDOW_DISPLAY_CONF, QSettings::IniFormat);
-        m_settings->setIniCodec("UTF-8");
         m_settings->beginGroup("window");
         density = m_settings->value("window_density", DEFAULT_DENSITY_320).toInt();
         if (density < DEFAULT_DENSITY_320) {
@@ -309,7 +308,6 @@ int DisplaySizeManager::getPhysicalDensity()
     if (QFile::exists(WINDOW_DISPLAY_CONF)) {
         QSettings *m_settings = nullptr;
         m_settings = new QSettings(WINDOW_DISPLAY_CONF, QSettings::IniFormat);
-        m_settings->setIniCodec("UTF-8");
         m_settings->beginGroup("window");
         density = m_settings->value("physical_density", DEFAULT_DENSITY_320).toInt();
         if (density < DEFAULT_DENSITY_320) {

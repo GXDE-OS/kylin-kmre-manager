@@ -77,7 +77,7 @@
     <signal name="filesMessage">
       <arg name="type" type="i"/>
       <arg name="metas" type="a(ss)"/>
-      <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="AndroidMetaList"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="AndroidMetaList"/>
     </signal>
     <signal name="currentCameraDevice">
       <arg name="deviceName" type="s"/>

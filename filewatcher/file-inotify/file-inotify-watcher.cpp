@@ -36,7 +36,7 @@ namespace kmre {
 FileInotifyWatcher::FileInotifyWatcher()
     : mInotifyFd(-1),
       mInitialized(false),
-      mLock(QMutex::Recursive),
+      mLock(),
       mCurrentPosition(0),
       mTotalRead(0)
 {

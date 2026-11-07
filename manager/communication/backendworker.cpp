@@ -332,7 +332,7 @@ bool BackendWorker::generateDesktop(const AppInfo &appInfo)
         "Comment[zh_CN]=" + appInfo.appName + "\n"
         "Exec=/usr/bin/startapp " + appInfo.pkgName + " " + appInfo.version + "\n"
         "Icon=" + QDir::homePath() + "/.local/share/icons/" + appInfo.pkgName + ".svg"
-        << endl;
+        << Qt::endl;
     
     out.flush();
     file.close();

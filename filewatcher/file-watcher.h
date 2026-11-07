@@ -30,7 +30,7 @@
 #include <QList>
 #include <QThread>
 #include <QMap>
-#include <QMutex>
+#include <QRecursiveMutex>
 
 #include "directory-check-worker.h"
 #include "storage-check-worker.h"
@@ -133,7 +133,7 @@ private:
     QMap<QString, QThread*> mThreads;
     QMap<QString, DirectoryCheckWorker*> mDirectoryWorkers;
     QMap<QString, StorageCheckWorker*> mStorageWorkers;
-    QMutex mMutex;
+    QRecursiveMutex mMutex;
 };
 
 } // namespace kmre

@@ -27,7 +27,7 @@
 
 #include <sys/types.h>
 
-#include <QMutex>
+#include <QRecursiveMutex>
 #include <QMimeDatabase>
 #include <QList>
 
@@ -88,10 +88,10 @@ private:
     };
 
     static Garbo garbo;
-    static QMutex lock;
+    static QRecursiveMutex lock;
 
-    QMutex mWatcherLock;
-    QMutex mListLock;
+    QRecursiveMutex mWatcherLock;
+    QRecursiveMutex mListLock;
     std::atomic<bool> mInitialized;
     std::atomic<bool> mIsRunning;
     std::atomic<bool> mIsThreadRunning;

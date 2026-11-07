@@ -40,7 +40,7 @@ namespace kmre {
 static QString homeDirPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
 
 FileInotifyService::Garbo FileInotifyService::garbo;
-QMutex FileInotifyService::lock(QMutex::Recursive);
+QRecursiveMutex FileInotifyService::lock;
 FileInotifyService* FileInotifyService::m_pInstance = nullptr;
 
 FileInotifyService* FileInotifyService::getInstance()
@@ -56,8 +56,8 @@ FileInotifyService* FileInotifyService::getInstance()
 }
 
 FileInotifyService::FileInotifyService()
-    : mWatcherLock(QMutex::Recursive),
-      mListLock(QMutex::Recursive),
+    : mWatcherLock(),
+      mListLock(),
       mInitialized(false),
       mIsRunning(false),
       mIsThreadRunning(false),

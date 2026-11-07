@@ -20,7 +20,7 @@ TEMPLATE = app
 
 QT -= gui
 QT += dbus
-CONFIG += c++11
+CONFIG += c++17
 CONFIG -= app_bundle
 
 target.source += $$TARGET

@@ -104,7 +104,7 @@ FileWatcher::FileWatcher(QObject *parent)
     : QObject(parent),
       m_pSystemWatcher(nullptr),
       mRunning(0),
-      mMutex(QMutex::Recursive)
+      mMutex()
 {
     mUid = getuid();
     mUserName = getUserName();

@@ -228,18 +228,18 @@ QStringList Utils::getDnsListFromSysConfig()
         while (!in.atEnd()) {
             QString line = in.readLine();
             if ((!line.startsWith("#")) && line.contains("nameserver")) {
-                QStringList dnsInfo = line.split("\t", QString::SkipEmptyParts);
+                QStringList dnsInfo = line.split("\t", Qt::SkipEmptyParts);
                 if (dnsInfo.size() == 2) {
                     QString dns = dnsInfo.at(1).trimmed();
-                    if (dns.split(".", QString::SkipEmptyParts).size() == 4) {
+                    if (dns.split(".", Qt::SkipEmptyParts).size() == 4) {
                         dnsList << dns;
                     }
                 }
                 else {
-                    dnsInfo = line.split(" ", QString::SkipEmptyParts);
+                    dnsInfo = line.split(" ", Qt::SkipEmptyParts);
                     if (dnsInfo.size() == 2) {
                         QString dns = dnsInfo.at(1).trimmed();
-                        if (dns.split(".", QString::SkipEmptyParts).size() == 4) {
+                        if (dns.split(".", Qt::SkipEmptyParts).size() == 4) {
                             dnsList << dns;
                         }
                     }

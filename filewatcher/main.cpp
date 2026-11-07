@@ -152,7 +152,7 @@ int main(int argc, char *argv[])
 
     QTranslator qtTranslator;
     qtTranslator.load("qt_" + locale,
-            QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+            QLibraryInfo::path(QLibraryInfo::TranslationsPath));
     a.installTranslator(&qtTranslator);
 
     kmre::FileWatcher* fw = kmre::FileWatcher::GetInstance();

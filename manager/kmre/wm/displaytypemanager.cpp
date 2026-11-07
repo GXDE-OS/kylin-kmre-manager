@@ -467,7 +467,6 @@ DisplayTypeManager::DisplayType getDisplayTypeFromSettings()
 
     if (QFile::exists(confPath)) {
         QSettings settings(confPath, QSettings::IniFormat);
-        settings.setIniCodec("UTF-8");
         settings.beginGroup("display");
         displayTypeString = settings.value("display_type", QString("")).toString();
         settings.endGroup();
@@ -495,8 +494,6 @@ static bool kmreConfigEnabled(const QString& group, const QString& key)
         QStringList groups;
         QStringList keys;
         QSettings settings(confPath, QSettings::IniFormat);
-        settings.setIniCodec("UTF-8");
-
         groups = settings.childGroups();
         if (groups.contains(group)) {
             settings.beginGroup(group);
