@@ -94,30 +94,26 @@ void set_and_save_env()
             syslog(LOG_INFO, "Using software render now!");
             #ifdef __x86_64__
             if (QFile::exists("/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so")) {
-                if (!qputenv("MESA_LOADER_DRIVER_OVERRIDE", "swrast")) {
-                    syslog(LOG_ERR, "swrast Set env 'MESA_LOADER_DRIVER_OVERRIDE' failed!");
-                }
+                // 注意：这里不能 qputenv 到自身进程！在 Wayland 会话下，自身进程一旦
+                // 被 MESA_LOADER_DRIVER_OVERRIDE=swrast 影响，后续 QOpenGLContext 相关
+                // 调用（如 supportsThreadedOpenGL 触发 QtWayland EGL 初始化）会让 Mesa
+                // 的 swrast 驱动在 Wayland EGL 平台上直接段错误，导致整个 manager 崩溃。
+                // 该变量只需写入 env 文件供 kylin-kmre-window 等子进程使用。
                 env_file.write("MESA_LOADER_DRIVER_OVERRIDE=swrast\n");
             } else {
-                syslog(LOG_INFO, "lib dri no found :/usr/lib/x86_64-linux-gnu/dri/i965_dri.so!");
+                syslog(LOG_INFO, "lib dri no found :/usr/lib/x86_64-linux-gnu/dri/swrast_dri.so!");
             }
             #endif
             #ifdef __aarch64__
             if (QFile::exists("/usr/lib/aarch64-linux-gnu/dri/swrast_dri.so")) {
-                if (!qputenv("MESA_LOADER_DRIVER_OVERRIDE", "swrast")) {
-                    syslog(LOG_ERR, "swrast Set env 'MESA_LOADER_DRIVER_OVERRIDE' failed!");
-                }
                 env_file.write("MESA_LOADER_DRIVER_OVERRIDE=swrast\n");
             } else {
                 syslog(LOG_INFO, "lib dri no found :/usr/lib/aarch64-linux-gnu/dri/swrast_dri.so!");
-            }            
+            }
             #endif
         }
         else if (GpuInfo::preferI965()) {
             if (QFile::exists("/usr/lib/x86_64-linux-gnu/dri/i965_dri.so")) {
-                if (!qputenv("MESA_LOADER_DRIVER_OVERRIDE", "i965")) {
-                    syslog(LOG_ERR, "i965 Set env 'MESA_LOADER_DRIVER_OVERRIDE' failed!");
-                }
                 env_file.write("MESA_LOADER_DRIVER_OVERRIDE=i965\n");
             } else {
                 syslog(LOG_INFO, "lib dri no found :/usr/lib/x86_64-linux-gnu/dri/i965_dri.so!");

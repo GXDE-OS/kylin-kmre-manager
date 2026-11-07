@@ -45,6 +45,9 @@
 #include <errno.h>
 
 #include <unistd.h>
+#include <sys/wait.h>
+#include <poll.h>
+#include <signal.h>
 
 #include "gpuinfo.h"
 
@@ -704,9 +707,77 @@ bool GpuInfo::getDrmDeviceNodeNumber(int* primaryMajor, int* primaryMinor,
     return true;
 }
 
+// 在子进程中安全地探测 QOpenGLContext::supportsThreadedOpenGL()。
+// 该调用会惰性初始化平台相关的 GL buffer integration：
+//   - X11/XWayland: Qt xcb GL integration
+//   - Wayland:      libqt-plugin-wayland-egl -> Mesa eglInitialize/driCreateNewScreen3
+// 在虚拟机等软件渲染环境（如 MESA_LOADER_DRIVER_OVERRIDE=swrast）下，Mesa 的
+// swrast 驱动在 Wayland EGL 平台上会直接段错误，进而杀死整个 kmre-manager，
+// 使 dbus 服务失联、window/startapp 全部无法工作。
+// 因此这里 fork 出子进程做探测：子进程崩溃或超时一律视为不支持，宿主进程不受影响。
+static bool probeSupportsThreadedOpenGLSafe()
+{
+    static int cachedResult = -1;
+    if (cachedResult >= 0) {
+        return cachedResult == 1;
+    }
+
+    int fds[2];
+    if (pipe(fds) != 0) {
+        bool result = QOpenGLContext::supportsThreadedOpenGL();
+        cachedResult = result ? 1 : 0;
+        return result;
+    }
+
+    pid_t pid = fork();
+    if (pid < 0) {
+        close(fds[0]);
+        close(fds[1]);
+        bool result = QOpenGLContext::supportsThreadedOpenGL();
+        cachedResult = result ? 1 : 0;
+        return result;
+    }
+
+    if (pid == 0) {
+        // 子进程：探测后把结果写回管道
+        close(fds[0]);
+        bool result = QOpenGLContext::supportsThreadedOpenGL();
+        char value = result ? 1 : 0;
+        if (write(fds[1], &value, 1) < 0) {
+            // ignore write error
+        }
+        close(fds[1]);
+        _exit(0);
+    }
+
+    // 父进程：限时等待子进程结果（崩溃时管道关闭会立刻返回；死锁时超时兜底）
+    close(fds[1]);
+    char value = 0;
+    struct pollfd pfd = { fds[0], POLLIN, 0 };
+    int pret = poll(&pfd, 1, 5000);
+    bool childOk = false;
+    if (pret > 0 && (pfd.revents & POLLIN)) {
+        if (read(fds[0], &value, 1) == 1 && value == 1) {
+            childOk = true;
+        }
+    }
+    close(fds[0]);
+
+    if (pret <= 0) {
+        kill(pid, SIGKILL);
+    }
+
+    int status = 0;
+    waitpid(pid, &status, 0);
+
+    cachedResult = (childOk && WIFEXITED(status) && WEXITSTATUS(status) == 0) ? 1 : 0;
+    syslog(LOG_INFO, "GpuInfo: supportsThreadedOpenGL probe (forked) result: %d", cachedResult);
+    return cachedResult == 1;
+}
+
 bool GpuInfo::supportsThreadedOpenGL()
 {
-    return QOpenGLContext::supportsThreadedOpenGL();
+    return probeSupportsThreadedOpenGLSafe();
 }
 
 static bool checkOpenGLESVersion(int* major, int* minor)
