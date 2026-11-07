@@ -1,4 +1,4 @@
-kylin-kmre-manager (3.0.0.7) UNRELEASED; urgency=medium
+kylin-kmre-manager (3.1.0.0) UNRELEASED; urgency=medium
 
   * 生成的.desktop添加gxme前缀
   * .desktop添加X-GXDE-KMREAPP=true、X-GXDE-KMRE-PKGNAME
@@ -6,8 +6,9 @@ kylin-kmre-manager (3.0.0.7) UNRELEASED; urgency=medium
   * 支持使用 DDE/GXDE 的 schemas 获取缩放比
   * 启用 UKUI_WAYLAND 选项
   * fix: 修复Wayland下无法正常运行程序的问题
+  * Qt6适配
 
- -- gfdgd_xi <3025613752@qq.com>  Sat, 07 Nov 2026 13:28:26 +0800
+ -- gfdgd_xi <3025613752@qq.com>  Sat, 07 Nov 2026 22:55:10 +0800
 
 kylin-kmre-manager (3.0.0.1) v101; urgency=medium
 
